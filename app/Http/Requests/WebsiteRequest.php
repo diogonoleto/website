@@ -23,7 +23,7 @@ class WebsiteRequest extends FormRequest
      */
     public function rules()
     {
-        $id = null;
+        $id = 'NULL';
         if($this->segment(2)){
             $id = $this->segment(2);
         }
