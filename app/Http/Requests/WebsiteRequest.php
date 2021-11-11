@@ -23,7 +23,10 @@ class WebsiteRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->segment(2);
+        $id = null;
+        if($this->segment(2)){
+            $id = $this->segment(2);
+        }
         return [
             "url" => "required|url|unique:websites,url,{$id},id",
         ];
