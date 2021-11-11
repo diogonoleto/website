@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class WebsiteRequest extends FormRequest
 {
@@ -27,6 +28,8 @@ class WebsiteRequest extends FormRequest
         if($this->segment(2)){
             $id = $this->segment(2);
         }
+        Log::info($this->segment(2));
+        Log::info($id);
         return [
             "url" => "required|url|unique:websites,url,{$id},id,deleted_at,NULL",
         ];
