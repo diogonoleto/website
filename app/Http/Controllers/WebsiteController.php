@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WebsiteRequest;
 use App\Models\Website;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class WebsiteController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware("auth")->except(["index"]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +22,9 @@ class WebsiteController extends Controller
      */
     public function index()
     {
-        $website = Website::all();
-        return view('website.index', compact('website'));
+        return Inertia::render('Website/Index', [
+            'websites' => fn () => Website::all(),
+        ]);
     }
 
     /**
@@ -26,7 +34,7 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        return view('website.create');
+        return Inertia::render('Website/Create');
     }
 
     /**
@@ -49,7 +57,9 @@ class WebsiteController extends Controller
      */
     public function show(Website $website)
     {
-        return view('website.show', compact('website'));        
+        return Inertia::render('Website/Show', [
+            'website' => $website
+        ]);
     }
 
     /**
@@ -60,7 +70,9 @@ class WebsiteController extends Controller
      */
     public function edit(Website $website)
     {
-        return view('website.edit', compact('website'));
+        return Inertia::render('Website/Edit', [
+            'website' => $website
+        ]);
     }
 
     /**

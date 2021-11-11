@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Website extends Model
 {
     use HasFactory, SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,6 +18,7 @@ class Website extends Model
     protected $fillable = [
         'url',
         'status',
+        'updated_at'
     ];
 
 }
