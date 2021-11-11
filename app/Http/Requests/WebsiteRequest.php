@@ -28,7 +28,7 @@ class WebsiteRequest extends FormRequest
             $id = $this->segment(2);
         }
         return [
-            "url" => "required|url|unique:websites,url,{$id},id",
+            "url" => "required|url|unique:websites,url,{$id},id,deleted_at,NULL",
         ];
     }
 }
