@@ -19,6 +19,7 @@ class CreateWebsitesTable extends Migration
             $table->string('status')->nullable();
             $table->softDeletes();
             $table->timestamps();
+            $table->index('id');
         });
     }
 
