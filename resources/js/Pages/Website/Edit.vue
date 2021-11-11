@@ -36,6 +36,8 @@
                         "
                     />
                 </TransitionChild>
+
+                <!-- This element is to trick the browser into centering the modal contents. -->
                 <span
                     class="hidden sm:inline-block sm:align-middle sm:h-screen"
                     aria-hidden="true"
@@ -82,6 +84,7 @@
                                             text-gray-900
                                         "
                                     >
+                                        {{ title }}
                                     </DialogTitle>
                                     <div class="mt-2">
                                         <div class="py-6">
@@ -206,6 +209,7 @@ export default {
         return {
             disabled: false,
             form: this.$inertia.form({
+                id: "",
                 url: "",
             }),
             title: "",
@@ -215,15 +219,25 @@ export default {
         close() {
             this.$emit("rClose", false);
             this.disabled = false;
+            this.form.reset("id");
             this.form.reset("url");
             this.form.clearErrors();
         },
         submit() {
             this.disabled = true;
-            this.form.post(this.route("website.store"), {
+            this.form.put(this.route("website.update", this.form.id), {
                 onSuccess: () => this.close(),
                 onError: () => (this.disabled = false),
             });
+        },
+    },
+    watch: {
+        item() {
+            if (this.item && this.item.id) {
+                this.form.id = this.item.id;
+                this.form.url = this.item.url;
+                this.title = "Edit URL";
+            }
         },
     },
 };

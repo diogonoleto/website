@@ -48,12 +48,10 @@
                                 focus:ring-green-500
                                 sm:ml-3 sm:w-auto sm:text-sm
                             "
-                            @click="
-                                dialogCreate = true;
-                                website = w;
-                            "
-                            >Add</a
+                            @click="dialogCreate = true"
                         >
+                            Add
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -172,7 +170,14 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-4 py-2 text-center whitespace-nowrap">
+                                    <td
+                                        class="
+                                            px-4
+                                            py-2
+                                            text-center
+                                            whitespace-nowrap
+                                        "
+                                    >
                                         <span
                                             class="
                                                 px-2
@@ -224,7 +229,7 @@
                                                 mr-2
                                             "
                                             @click="
-                                                dialogCreate = true;
+                                                dialogEdit = true;
                                                 website = w;
                                             "
                                             >Edit</a
@@ -265,10 +270,11 @@
                 </div>
             </div>
         </div>
-        <Create
-            :open="dialogCreate"
+        <Create :open="dialogCreate" @rClose="dialogCreate = $event" />
+        <Edit
+            :open="dialogEdit"
             @rClose="
-                dialogCreate = $event;
+                dialogEdit = $event;
                 website = {};
             "
             :item="website"
@@ -289,6 +295,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import List from "@/Pages/Website/List";
 import Create from "@/Pages/Website/Create";
+import Edit from "@/Pages/Website/Edit";
 import Delete from "@/Pages/Website/Delete";
 import { Inertia } from "@inertiajs/inertia";
 import moment from "moment";
@@ -299,6 +306,7 @@ export default {
         List,
         Head,
         Create,
+        Edit,
         Delete,
     },
     setup() {},
@@ -306,6 +314,7 @@ export default {
         return {
             dialogCreate: false,
             dialogDelete: false,
+            dialogEdit: false,
             website: {},
         };
     },
