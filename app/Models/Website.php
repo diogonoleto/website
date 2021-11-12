@@ -18,7 +18,6 @@ class Website extends Model
     protected $fillable = [
         'url',
         'status',
-        'updated_at'
+        'updated_at',
     ];
-
 }

@@ -15,11 +15,12 @@ class CreateWebsitesTable extends Migration
     {
         Schema::create('websites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('url')->unique();
+            $table->string('url');
             $table->string('status')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->index('id');
+            $table->unique(['url', 'deleted_at']);
         });
     }
 
